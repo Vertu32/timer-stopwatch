@@ -1,26 +1,119 @@
 import React, { Component } from 'react';
 
 
+
+
 class AddTimer extends Component {
    constructor (props) {
        super (props);
-
        this.state =  { 
+            iconStartBtn: ' play',
+            visibleBtnStop: "btnSecStop",
+            visibleBtnStart: "btnSecStart",
+            disabledBtn: '',
             copySt: true,
             timerPassive: true,
             secondsTotal: null,
             loader: {},
-            visible: {},
-            iconClass: 'btnStart play',
             second: '00',
             minute: '00',
-            hour: '00',
+            hour: '00', 
             secondC: '',
             minuteC: '',
             hourC: '', 
         }
     }
+    inputValue = (e) => {
+        let tt = String.fromCharCode(e.which);
+        const {id, value} = e.currentTarget;
 
+        (!(/[0-9]/.test(tt))) && e.preventDefault();
+        (value >= 0 && value <=60 && value.length <= 2)? this.setState ({[id]: value, copySt: true}): e.preventDefault();
+    }
+    inputBlur = () => {
+         const {second,minute,hour} = this.state;                                              
+         (second.length == 0 ) && this.setState ({second: '00'});
+         (minute.length == 0 ) && this.setState ({minute:'00'});
+         (hour.length == 0) && this.setState ({hour: '00'});
+         (second.length < 2 && second.length != 0 ) && this.setState ({second: '0' + second});
+         (minute.length < 2 && minute.length != 0 ) && this.setState ({minute:'0' +  minute});
+         (hour.length < 2 && hour.length != 0) && this.setState ({hour: '0' + hour});
+    }
+    copyState = () => {
+        const {second,minute,hour} = this.state;
+        (this.state.copySt) && (this.setState ({copySt: false, secondC: second, minuteC: minute, hourC: hour,}))
+    }
+
+    clickBtn = () => {
+        const {second,minute,hour} = this.state;
+        let seconds = (+second) + (+minute)*60 + (+hour)*60*60;
+        
+        if (seconds != 0) {
+            this.copyState();
+            this.lineLoaderStr();
+
+            if (this.state.timerPassive) {
+                this.iconPauseStart();
+                this.invisibleBtn()
+                this.setState ({timerPassive: false,});
+                
+                let timer = setInterval (() => {
+                    if (seconds <= 1) {
+                        this.lineLoaderStop();
+                        this.iconPlayStart();
+                    }
+
+                    (seconds <= 0) && this.visibleBtn(); 
+
+                    if (seconds <= 0 || this.state.timerPassive) {
+                        clearInterval(timer);
+                        this.setState ({timerPassive: true,}); 
+                    } else {
+                        seconds--;
+                        let second = Math.floor ((seconds) % 60),
+                            minute = Math.floor ((seconds/60) % 60),
+                            hour = Math.floor ((seconds/60/60));
+
+                        (second < 10) && (second = "0" + second);
+                        (minute < 10) && (minute = "0" + minute);
+                        (hour < 10) && (hour = "0" + hour);
+                    
+                        this.setState ({
+                            second,
+                            minute,
+                            hour,
+                        });
+                    }
+                },1000);
+            } else {
+                this.visibleBtn();
+                this.iconPlayStart();
+                this.lineLoaderPause();
+                this.setState ({timerPassive: true});
+            }
+        } 
+        return false;
+    }
+    clickBtnStop = () => {
+        
+        const {secondC,minuteC,hourC} = this.state;
+        this.setState ({
+            second: secondC,
+            minute: minuteC,
+            hour: hourC,
+            copySt: true,
+            timerPassive: true
+        })
+        this.iconPlayStart();
+        this.lineLoaderStop();
+        this.invisibleBtn();
+    }
+    visibleBtn = () => this.setState ({visibleBtnStart: "btnSecStart transfStart", visibleBtnStop: "btnSecStop transfStop" });
+    invisibleBtn = () => this.setState ({visibleBtnStart: "btnSecStart", visibleBtnStop: "btnSecStop"});
+    
+    iconPlayStart = () => this.setState({iconStartBtn: ' play'});
+    iconPauseStart = () => this.setState({iconStartBtn: ' pause'});
+    
     lineLoaderStr = () => {
         if (this.state.secondsTotal == null) {
             const {second,minute,hour} = this.state;
@@ -39,7 +132,7 @@ class AddTimer extends Component {
                     'animation': `move ${this.state.secondsTotal}s linear infinite`,
                     'animation-play-state': 'running',
                 }   
-            })  
+            })
         }
     }
     lineLoaderPause = () => {
@@ -59,108 +152,8 @@ class AddTimer extends Component {
         });
     }
 
-    inputValue = (e) => {
-        let tt = String.fromCharCode(e.which);
-        const {id, value} = e.currentTarget;
-
-        (!(/[0-9]/.test(tt))) && e.preventDefault();
-        (value >= 0 && value <=60 && value.length <= 2)? this.setState ({[id]: value, copySt: true}): e.preventDefault();
-    }
-    inputBlur = () => {
-        /* if(e.target.id === this.state.inputSelectID) { 
-             return false
-         } */
-         const {second,minute,hour} = this.state;                                              //Посмотреть возможность короткой записи
-         (second.length == 0 ) && this.setState ({second: '00'});
-         (minute.length == 0 ) && this.setState ({minute:'00'});
-         (hour.length == 0) && this.setState ({hour: '00'});
-         (second.length < 2 && second.length != 0 ) && this.setState ({second: '0' + second});
-         (minute.length < 2 && minute.length != 0 ) && this.setState ({minute:'0' +  minute});
-         (hour.length < 2 && hour.length != 0) && this.setState ({hour: '0' + hour});
-    }
-
-    visibleBtn = () => {
-        this.setState ({visible: {display: 'inline'}});
-    } 
-    invisibleBtn = () => {
-        this.setState ({visible: {display: 'none'}});
-    }
-
-    changeIconPause = () => {
-        this.setState({iconClass: 'btnStart pause'});
-    }
-    changeIconPlay = () => {
-        this.setState({iconClass: 'btnStart play'});
-    }
-
-    copyState = () => {
-        const {second,minute,hour} = this.state;
-        (this.state.copySt) && (this.setState ({copySt: false, secondC: second, minuteC: minute, hourC: hour,}))
-    }
-
-    clickBtn = () => {
-        this.copyState();
-        this.invisibleBtn();
-        this.changeIconPause();
-        this.lineLoaderStr();
-
-        if (this.state.timerPassive) {
-            const {second,minute,hour} = this.state;
-            let seconds = (+second) + (+minute)*60 + (+hour)*60*60;
-            this.setState ({
-                timerPassive: false,
-            });
-            let timer = setInterval (() => {
-                if (seconds <= 1) {
-                    this.lineLoaderStop();
-                    this.changeIconPlay();
-                    this.visibleBtn();
-                }
-                if (seconds <= 0 || this.state.timerPassive) {
-                    clearInterval(timer);
-                    this.setState ({
-                        timerPassive: true,
-                    }); 
-                } else {
-                    seconds--;
-                    let secondX = Math.floor ((seconds) % 60),
-                        minuteX = Math.floor ((seconds/60) % 60),
-                        hourX = Math.floor ((seconds/60/60));
-
-                    (secondX < 10) && (secondX = "0" + secondX);
-                    (minuteX < 10) && (minuteX = "0" + minuteX);
-                    (hourX < 10) && (hourX = "0" + hourX);
-                   
-                    this.setState ({
-                        second:secondX,
-                        minute:minuteX,
-                        hour:hourX
-                    });
-                }
-            },1000);
-        } else {
-            this.visibleBtn();
-            this.changeIconPlay();
-            this.lineLoaderPause();
-            this.setState ({timerPassive: true});
-        }
-    
-    }
-    clickBtnStop = () => {
-        this.invisibleBtn();
-        this.lineLoaderStop();
-        const {secondC,minuteC,hourC} = this.state;
-        this.setState ({
-            second: secondC,
-            minute: minuteC,
-            hour: hourC,
-            copySt: true,
-            timerPassive: true
-        })
-    }
-    
     render() { 
-        const {second,minute,hour,loader,iconClass,visible} = this.state;
+        const {second,minute,hour,loader} = this.state;
 
         return (
             <div className = {this.props.timerBtn}>
@@ -195,13 +188,12 @@ class AddTimer extends Component {
                     <div className = "timer__button">
                         <div className ="timer__button-content">
                             <button
-                            className = {iconClass}
-                            onClick = {this.clickBtn}
+                                className = {this.state.visibleBtnStart+this.state.iconStartBtn}
+                                onClick = {this.clickBtn}
                             ></button>
                             <button
-                            className = "btnStop"
-                            onClick = {this.clickBtnStop}
-                            style = {visible}
+                                className = {this.state.visibleBtnStop+" stop"}
+                                onClick = {this.clickBtnStop}
                             ></button>
                         </div>
                     </div>

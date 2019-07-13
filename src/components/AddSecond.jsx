@@ -31,18 +31,18 @@ class AddSecond extends Component {
                 let scnd = setInterval (() => {
                     if (this.state.secondActive) {
                         seconds++;
-                        let secondX = Math.floor ((seconds) % 60),
-                            minuteX = Math.floor ((seconds/60) % 60),
-                            hourX = Math.floor ((seconds/60/60));
+                        let second = Math.floor ((seconds) % 60),
+                            minute = Math.floor ((seconds/60) % 60),
+                            hour = Math.floor ((seconds/60/60));
 
-                        (secondX < 10) && (secondX = "0" + secondX);
-                        (minuteX < 10) && (minuteX = "0" + minuteX);
-                        (hourX < 10) && (hourX = "0" + hourX);
+                        (second < 10) && (second = "0" + second);
+                        (minute < 10) && (minute = "0" + minute);
+                        (hour < 10) && (hour = "0" + hour);
 
                         this.setState ({
-                            second: secondX,
-                            minute: minuteX,
-                            hour: hourX,
+                            second,
+                            minute,
+                            hour,
                         })
                     } else {
                         clearInterval(scnd);
@@ -51,8 +51,6 @@ class AddSecond extends Component {
 
         } else {
             this.saveTime();
-           
-            //сохранение результатов
         }
     }
     clickBtnStop = () => {
@@ -82,7 +80,7 @@ class AddSecond extends Component {
     saveTime = () => {
         const {second,minute,hour,number} = this.state;
         const a = [
-            <div className = "saveTimer__container">
+            <div key = {number} className = "saveTimer__container">
                 <div className = "saveTimer__line">
                     <div className = "saveTimer__number">{number}</div>
                 </div>
@@ -91,9 +89,8 @@ class AddSecond extends Component {
         ]
         this.setState ({time: a, number: number+1});
     }
-    clearTime = () => {
-        this.setState ({time: [], number: 1});
-    }
+    clearTime = () => this.setState ({time: [], number: 1});
+
     render() { 
         const {second,minute,hour} = this.state;
 
@@ -116,7 +113,7 @@ class AddSecond extends Component {
                             ></button>
                         </div>
                     </div>
-                    {this.state.time}
+                     {this.state.time}
                 </div>
             </div> 
         )

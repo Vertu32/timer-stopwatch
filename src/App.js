@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AddTimer from './components/AddTimer';
 import AddSecond from "./components/AddSecond";
+import Wheather from "./components/Wheather"
 import { directive } from '@babel/types';
 
 
@@ -44,6 +45,7 @@ class App extends Component {
             <button className = {this.state.btnShadowS} onClick = {this.secondOn}>Секундомер </button>
             <button className = {this.state.btnShadowT} onClick = {this.timerOn}>Таймер </button>
           </div>
+          <Wheather />
           <AddTimer timerBtn = {this.state.timerClass} />
           <AddSecond secondBtn = {this.state.secondClass}/>
         </div>

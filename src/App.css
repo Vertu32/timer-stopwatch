@@ -12,16 +12,19 @@
   opacity: 0;
   transition: all 5s ease;
 }
+.global::after {
+  background-color: linear-gradient(135deg, rgba(23,234,217,1) 0%, rgba(96,120,234,1) 62%);
+}
 
 .secColor {
   opacity: 1;
   background: linear-gradient(135deg, rgba(23,234,217,1) 0%, rgba(96,120,234,1) 62%);
-  transition: all 5s ease;
+  
 }
 .timColor {
   opacity: 1;
   background: linear-gradient(135deg, rgba(255,100,54,1) 0%, rgba(251,68,116,1) 61%);
-  transition: all 5s ease;
+  transition: all 1s ease;
 }
 .global__btn {
   display: flex;
@@ -126,8 +129,8 @@
   background: #ffffff;
   margin: 0 auto;
   margin-top: 15px;
-  max-width: 350px;
-  opacity: ;
+  width: 350px;
+  margin-bottom: 26px;
 }
 @keyframes move {
   from {width: 350px}
@@ -174,9 +177,11 @@ margin-right: 6px;
 }
 
 /*button*/
-.second__button-content {
+.second__button-content,
+.timer__button-content {
   position: relative;
   width: 140px;
+  padding-bottom: 70px;
 }
 .btnSecStart {
   z-index: 1;
@@ -232,10 +237,6 @@ margin-right: 6px;
   font-size: 20px;
   width: 500px;
   justify-content: space-between;
-}
-
-.second__button-content {
-  padding-bottom: 70px;
 }
 .saveTimer__line {
   width: 50px;

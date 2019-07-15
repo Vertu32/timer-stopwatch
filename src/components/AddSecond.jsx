@@ -71,7 +71,7 @@ class AddSecond extends Component {
     invisibleBtn = () => this.setState({ visibleBtnStart: "btnSecStart", visibleBtnStop: "btnSecStop" });
 
     iconPlayStart = () => this.setState({ iconStartBtn: ' play' });
-    iconSaveStart = () => this.setState({ iconStartBtn: ' play' });
+    iconSaveStart = () => this.setState({ iconStartBtn: ' circle-down' });
     iconPauseStart = () => this.setState({ iconStartBtn: ' pause' });
     iconPauseStop = () => this.setState({ iconStopBtn: ' pause' });
     iconStopStop = () => this.setState({ iconStopBtn: ' stop' });
@@ -95,26 +95,29 @@ class AddSecond extends Component {
         const { second, minute, hour } = this.state;
 
         return (
-            <div className={this.props.secondBtn}>
-                    <div className="second__content">
-                        <div className="second__display">
-                            <p className="second__time">{hour}:{minute}:{second}</p>
-                        </div>
-                        <div className="timer__button">
-                            <div className="second__button-content">
-                                <button
-                                    className={this.state.visibleBtnStart + this.state.iconStartBtn}
-                                    onClick={this.clickBtnStr}
-                                    style={this.state.iconStart}
-                                ></button>
-                                <button
-                                    className={this.state.visibleBtnStop + this.state.iconStopBtn}
-                                    onClick={this.clickBtnStop}
-                                ></button>
-                            </div>
-                        </div>
-                        {this.state.time}
+            <div className={this.props.secondBtn} >
+                <div
+                    className="second__content"
+                    style={(this.props.animation) ? { animation: 'opacity1 0.5s ease-in-out' } : {}}
+                >
+                    <div className="second__display">
+                        <p className="second__time">{hour}:{minute}:{second}</p>
                     </div>
+                    <div className="timer__button">
+                        <div className="second__button-content">
+                            <button
+                                className={this.state.visibleBtnStart + this.state.iconStartBtn}
+                                onClick={this.clickBtnStr}
+                                style={this.state.iconStart}
+                            ></button>
+                            <button
+                                className={this.state.visibleBtnStop + this.state.iconStopBtn}
+                                onClick={this.clickBtnStop}
+                            ></button>
+                        </div>
+                    </div>
+                    {this.state.time}
+                </div>
             </div>
         )
     }

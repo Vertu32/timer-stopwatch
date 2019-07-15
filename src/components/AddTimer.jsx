@@ -24,10 +24,10 @@ class AddTimer extends Component {
         }
     }
     inputValue = (e) => {
-        let tt = String.fromCharCode(e.which);
+        let b = String.fromCharCode(e.which);
         const { id, value } = e.currentTarget;
 
-        (!(/[0-9]/.test(tt))) && e.preventDefault();
+        (!(/[0-9]/.test(b))) && e.preventDefault();
         (value >= 0 && value <= 60 && value.length <= 2) ? this.setState({ [id]: value, copySt: true }) : e.preventDefault();
         this.lineLoaderStop();
     }
@@ -59,7 +59,7 @@ class AddTimer extends Component {
                 this.setState({ timerPassive: false, });
 
                 let timer = setInterval(() => {
-                   
+
                     if (seconds == 1) {
                         this.lineLoaderStop();
                         this.iconPlayStart();
@@ -87,7 +87,7 @@ class AddTimer extends Component {
                         });
                     }
                 }, 1000);
-            
+
             } else {
                 this.visibleBtn();
                 this.iconPlayStart();
@@ -158,8 +158,12 @@ class AddTimer extends Component {
         const { second, minute, hour, loader } = this.state;
 
         return (
+
             <div className={this.props.timerBtn}>
-                <div className='timer__content'>
+                <div
+                    className="timer__content"
+                    style={(this.props.animation) ? { animation: 'opacity1 0.5s ease-in-out' } : {}}
+                >
                     <div className="timer__display">
                         <input
                             className="timer__input"
@@ -169,7 +173,7 @@ class AddTimer extends Component {
                             onChange={this.inputValue}
                             onBlur={this.inputBlur}
                         />:
-                            <input
+                        <input
                             className="timer__input"
                             type="text"
                             id="minute"
@@ -177,7 +181,7 @@ class AddTimer extends Component {
                             onChange={this.inputValue}
                             onBlur={this.inputBlur}
                         />:
-                            <input
+                        <input
                             className="timer__input"
                             type="text"
                             id="second"

@@ -1,0 +1,160 @@
+@media(max-width: 1100px) {
+    .main__content {
+        display: block;
+        width: 100%;
+        
+    }
+    .global__content {
+        margin: 0 auto;
+        margin-bottom: 30px;
+    }
+    .global {
+        padding-bottom: 5px;
+    }
+}
+@media(max-width: 500px) {
+    .global__btn {
+        flex-direction:column;
+        padding: 25px 0;
+    }
+    .btn-menu {
+        margin: auto;
+    }
+    .secOn {
+        transform: translate(0, -10px) scale(1.2);
+    }
+    .timOn {
+        transform: translate(0, 10px) scale(1.2);
+    }
+    .global__content {
+        font-size: 70px;
+    }
+    .second__display {
+        padding: 120px 0 45px
+    }
+    .stopWatch {
+        padding: 320px 0 20px;
+    }
+    .global__content {
+        min-height: 400px;
+    }
+    .saveTime__container {
+        font-size: 17px;
+    }
+    .timer__input {
+        font-size: 70px;
+        max-width: 103px;
+    }
+    .timer__display {
+        padding-top: 120px;
+    }
+    .global__content.wheather {
+        height: 400px;
+    }
+    .wheather__content {
+        padding-top: 25px;
+    }
+}  
+@media(max-width: 460px) {
+    .preLoader {
+        width: 300px;
+    }
+    @keyframes moveLoader {
+        from {
+          width: 300px
+        }
+      
+        to {
+          width: 0px
+        }
+      }
+      
+      @keyframes moveLoader1 {
+        from {
+          width: 20px
+        }
+      
+        40% {
+          width: 350px
+        }
+      
+        to {
+          width: 300px
+        }
+      }
+}
+@media(max-width: 411px) {
+    .stopWatch {
+        padding: 300px 0 15px;
+    }
+    .global__container {
+        width: 95vw;
+    }
+    .timer__input {
+        font-size: 60px;
+        max-width: 88px;
+    } 
+    .stop:before,
+    .pause:before,
+    .circle-down:before,
+    .play:before {
+        font-size: 45px;
+    }
+     .global__content {
+        font-size: 60px;
+    }
+    .btnSecStart {
+        left: 47px;
+        
+    }
+    .btnSecStop {
+        right: 47px;
+    }
+    .transfStart {
+        transform: translateX(-30px);
+    }
+    .transfStop {
+        opacity: 1;
+    transform: translateX(30px);
+    }
+    .preLoader {
+        width: 250px;
+    }
+    @keyframes moveLoader {
+        from {
+          width: 250px
+        }
+      
+        to {
+          width: 0px
+        }
+      }
+      
+      @keyframes moveLoader1 {
+        from {
+          width: 10px
+        }
+      
+        40% {
+          width: 270px
+        }
+      
+        to {
+          width: 250px
+        }
+    }
+    .saveTime__container {
+        padding: 0px 40px;
+        font-size: 14px;
+    }
+    .wheather__icon {
+        width: 170px;
+        height: 95px;
+    }
+    .wheather-city {
+        font-size: 30px;
+    }
+    .wheather-summary {
+        font-size: 20px;
+    }
+} 

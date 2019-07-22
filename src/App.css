@@ -7,7 +7,7 @@
 /*App*/
 .global {
   padding-bottom: 20px;
-  min-height: 968px;
+  min-height: 100vh;
   color: white;
   z-index: 1;
   position: relative;
@@ -39,21 +39,22 @@
 .global__container {
   width: 90vw;
   margin: 0 auto;
-  padding: 60px 0px 30px;
 }
 
 .global__btn {
-  width: 550px;
+  max-width: 550px;
+  /* width: 100%; */
   margin: 0 auto;
-  padding-bottom: 200px;
-  position: relative;
+  padding: 10vh 0;
+  display: flex;
+  justify-content: space-between;
 }
-
-.wheather__container {
+.global__content {
   font-size: 88px;
   font-family: 'Aldrich', sans-serif;
-  height: 500px;
-  width: 500px;
+  min-height: 500px;
+  max-width: 500px;
+  width: 100%;
   border: 1px white solid;
   border-radius: 50px 50px 50px 50px;
   -moz-border-radius: 50px 50px 50px 50px;
@@ -64,18 +65,17 @@
   margin: 0px 20px;
 }
 
-.clock__container {
-  position: relative;
-  min-height: 500px;
-  width: 500px;
-  margin: 0px 20px;
+.global__content.wheather {
+  height: 500px;
 }
 
 /*button-menu*/
 
 .btn-menu {
-  height: 40px;
-  width: 200px;
+  display: inline-block;
+  max-width: 200px;
+  width: 100%;
+  padding: 7px;
   background-color: transparent;
   border-radius: 46px 46px 46px 46px;
   -moz-border-radius: 46px 46px 46px 46px;
@@ -83,20 +83,9 @@
   border: 1px solid #ffffff;
   color: white;
   font-size: 20px;
-  position: absolute;
   outline: none;
   transition: all 0.2s ease-in-out;
   font-family: 'Assistant', sans-serif;
-}
-
-.btn-sec {
-  left: 10px;
-  top: 20px;
-}
-
-.btn-tim {
-  right: 10px;
-  top: 20px;
 }
 
 .secOn {
@@ -122,20 +111,6 @@
 
 }
 
-@keyframes opacity {
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
 .wheather__icon {
   width: 200px;
   height: 115px;
@@ -157,9 +132,35 @@
   padding-bottom: 20px;
 }
 
-
-
 /*Timer*/
+
+.timer {
+  position: relative;
+}
+
+.timer__main,
+.second__main {
+  position: absolute;
+  z-index: 0;
+  visibility: hidden;
+  left: 0;
+  top: 0;
+  min-height: 500px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.show {
+  z-index: 1;
+  visibility: visible;
+}
+
+.timer__content,
+.second__content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
 
 .timer__display {
   margin: 0 auto;
@@ -176,57 +177,6 @@
   font-family: 'Aldrich', sans-serif;
 }
 
-.timer,
-.second {
-  font-size: 88px;
-  font-family: 'Aldrich', sans-serif;
-  min-height: 500px;
-  width: 500px;
-  border-radius: 50px 50px 50px 50px;
-  -moz-border-radius: 50px 50px 50px 50px;
-  -webkit-border-radius: 50px 50px 50px 50px;
-  padding-bottom: 20px;
-  position: absolute;
-  -webkit-box-shadow: 0px 0px 51px -22px rgba(0, 0, 0, 1);
-  -moz-box-shadow: 0px 0px 51px -22px rgba(0, 0, 0, 1);
-  box-shadow: 0px 0px 51px -22px rgba(0, 0, 0, 1);
-  border: 1px white solid;
-  z-index: 0;
-  visibility: hidden;
-}
-
-.timer__content,
-.second__content {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.show {
-  z-index: 1;
-  visibility: visible;
-}
-
-@keyframes opacity1 {
-  0% {
-    opacity: 1;
-  }
-
-  20% {
-    opacity: 0;
-  }
-
-  80% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-
-
 .preLoader {
   min-height: 4px;
   background: #ffffff;
@@ -235,34 +185,6 @@
   width: 350px;
   margin-bottom: 26px;
 }
-
-@keyframes move {
-  from {
-    width: 350px
-  }
-
-  to {
-    width: 0px
-  }
-}
-
-@keyframes move1 {
-  from {
-    width: 50px
-  }
-
-  40% {
-    width: 400px
-  }
-
-  to {
-    width: 350px
-  }
-}
-
-
-
-
 
 /*button*/
 
@@ -334,35 +256,89 @@
 }
 
 /*second*/
-
-.second__time {
-  position: absolute;
-  left: 27px;
-}
-
-.second__display {
+.stopWatch {
   position: relative;
-  padding-top: 160px;
-  padding-bottom: 150px;
+  padding: 380px 0 20px;
+}
+.second__display {
+  padding: 160px 0 45px;
+  text-align: center;
 }
 
 /*SaveTime__container*/
 
-.saveTimer__container {
+.saveTime__container {
   margin: 0 auto;
-  padding-left: 60px;
-  padding-right: 60px;
+  padding: 0 60px;
   display: flex;
   font-size: 20px;
-  width: 500px;
+  max-width: 500px;
   justify-content: space-between;
 }
 
-.saveTimer__line {
+.saveTime__line {
   width: 50px;
   border-right: 1px #ffffff solid;
 }
 
-.saveTimer__number {
+.saveTime__number {
   margin: 0 auto;
+}
+
+/*animation*/
+
+@keyframes moveLoader {
+  from {
+    width: 350px
+  }
+
+  to {
+    width: 0px
+  }
+}
+
+@keyframes moveLoader1 {
+  from {
+    width: 50px
+  }
+
+  40% {
+    width: 400px
+  }
+
+  to {
+    width: 350px
+  }
+}
+
+@keyframes opacityClock {
+  0% {
+    opacity: 1;
+  }
+
+  20% {
+    opacity: 0;
+  }
+
+  80% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes opacityWheater {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AddTimer from './components/AddTimer';
 import AddSecond from "./components/AddSecond";
-import Wheather from "./components/Wheather"
+import Weather from "./components/Weather"
 import { directive } from '@babel/types';
 
 
@@ -77,7 +77,7 @@ class App extends Component {
               <AddTimer timerBtn = {this.state.timerClass} animation = {this.state.animat}/>
               <AddSecond secondBtn = {this.state.secondClass} animation = {this.state.animat} />
             </div>
-            <Wheather />
+            <Weather />
           </div>
         </div>
       </div>

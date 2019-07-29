@@ -19,7 +19,7 @@ const place = [
         long: "-74.006",
     }
 ]
-class Wheather extends Component {
+class Weather extends Component {
     state = {
         city: place,
         data: "",
@@ -58,7 +58,7 @@ class Wheather extends Component {
         });
         let i = 0;
         setInterval(() => {
-            this.animationWheather();
+            this.animationWeather();
             setTimeout(() => {
                 i++;
                 (i == 4) && (i = 0);
@@ -71,7 +71,7 @@ class Wheather extends Component {
             }, 500);
         }, 15000);
     };
-    animationWheather = () => {
+    animationWeather = () => {
         this.setState({ animat: true });
         setTimeout(() => {
             this.setState({ animat: false })
@@ -81,22 +81,22 @@ class Wheather extends Component {
     render() {
         const { icon, temperature, summary, timezone, animat } = this.state;
         return (
-            <div className="global__content wheather">
+            <div className="global__content weather">
                 <div
-                    className="wheather__content"
+                    className="weather__content"
                     style={(animat) ? { animation: "opacityWheater 1s ease-in-out" } : {}}
                 >
-                    <div className="wheather__icon">
+                    <div className="weather__icon">
                         <Skycons
                             color="white"
                             icon={icon}
                             autoplay={true}
                         />
                     </div>
-                    <div className="wheather__text">
-                        <p className="wheather-city">{timezone}</p>
-                        <p className="wheather-temp">{temperature}</p>
-                        <p className="wheather-summary">{summary}</p>
+                    <div className="weather__text">
+                        <p className="weather-city">{timezone}</p>
+                        <p className="weather-temp">{temperature}</p>
+                        <p className="weather-summary">{summary}</p>
                     </div>
                 </div>
             </div>
@@ -104,4 +104,4 @@ class Wheather extends Component {
     }
 }
 
-export default Wheather;
+export default Weather;

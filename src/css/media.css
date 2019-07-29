@@ -48,10 +48,10 @@
     .timer__display {
         padding-top: 120px;
     }
-    .global__content.wheather {
+    .global__content.weather {
         height: 400px;
     }
-    .wheather__content {
+    .weather__content {
         padding-top: 25px;
     }
 }  
@@ -147,14 +147,14 @@
         padding: 0px 40px;
         font-size: 14px;
     }
-    .wheather__icon {
+    .weather__icon {
         width: 170px;
         height: 95px;
     }
-    .wheather-city {
+    .weather-city {
         font-size: 30px;
     }
-    .wheather-summary {
+    .weather-summary {
         font-size: 20px;
     }
 } 

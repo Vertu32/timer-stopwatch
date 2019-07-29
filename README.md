@@ -2,7 +2,7 @@
 
 "Timer-Stopwatch-Weather" application made with React. The user can switch timer / stopwatch mode and use them in everyday life (training, learning, pomadoro ...)
 
-### [Demo on Heroku](https://) :point_left:
+### [Demo on Heroku](https://timer-stopwatch-weather-react.herokuapp.com/) :point_left:
 
 - React
 - JSX

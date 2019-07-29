@@ -69,7 +69,7 @@ class AddSecond extends Component {
             this.clearTime();
         } else {
             this.setState({ secondActive: false, saveBtn: false });
-            this.iconPauseStart();
+            this.iconPlayStart();
             this.iconStopStop();
         }
     };
